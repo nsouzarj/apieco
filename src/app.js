@@ -14,6 +14,8 @@ const userRoutes = require('./routes/user.routes');
 // Use Routes
 app.use('/api/users', userRoutes);
 
+
+
 // Setup Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

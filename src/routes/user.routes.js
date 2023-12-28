@@ -17,4 +17,12 @@ router.put('/:id', userController.updateUser);
 // Rota para deletar um usuário
 router.delete('/:id', userController.deleteUser);
 
+// Rota de teste
+router.get('/', (req, res) => {
+    console.log("Funcionpou.....")
+    res.send('<H1>TESTE<H1>');
+});
+
+
+
 module.exports = router;
