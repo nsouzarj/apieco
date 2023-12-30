@@ -1,8 +1,6 @@
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const pool = require('../config/db.config');
-const { deleteUser } = require('../controllers/user.controller');
-
 class User {
     constructor(user) {
         this.username = user.username;
