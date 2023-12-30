@@ -24,28 +24,14 @@ exports.register = (req, res) => {
 exports.login = (req, res) => {
     const { username, password } = req.body;
 
-    // Find the user by username
-    User.findOne({ username }, (err, user) => {
-        if (err) {
-            return res.status(500).json({ error: 'Erro ao autenticar usuário' });
-        }
-
-        if (!user) {
-            return res.status(404).json({ error: 'Usuário não encontrado' });
-        }
-
-        // Check if the password is correct
-        if (user.password !== password) {
-            return res.status(401).json({ error: 'Senha incorreta' });
-        }
-
-        // Authentication successful
-        return res.status(200).json({ message: 'Autenticação bem-sucedida', user });
-    });
+    User.findByUsername()
+    
 };
 
 exports.getUserById = (req, res) => {
-  // Lógica para buscar um usuário pelo ID
+    const userId = req.params.id;
+     
+    return User.findById(userId);
 
 };
 
@@ -53,7 +39,7 @@ exports.updateUser = (req, res) => {
     const userId = req.params.id;
     const updatedUser = req.body;
 
-    User.findByIdAndUpdate(userId, updatedUser, { new: true }, (err, user) => {
+    User.findById(userId, updatedUser, { new: true }, (err, user) => {
         if (err) {
             return res.status(500).json({ error: 'Erro ao atualizar usuário' });
         }
@@ -69,7 +55,7 @@ exports.updateUser = (req, res) => {
 exports.deleteUser = (req, res) => {
     const userId = req.params.id;
 
-    User.findByIdAndDelete(userId, (err, deletedUser) => {
+    User.deleteById((userId) => {
         if (err) {
             return res.status(500).json({ error: 'Erro ao deletar usuário' });
         }
