@@ -23,36 +23,15 @@ class User {
             .catch(err => console.error(err));
     }
 
-    // Encontrar um usuário pelo email
-    static findByEmail(email) {
-        let sql = `SELECT * FROM users WHERE email = $1`;
-        return pool.query(sql, [email]);
-    }
 
-    // Encontrar um usuário pelo ID
+    // Buscar usuário pelo ID
     static findById(id) {
         let sql = `SELECT * FROM users WHERE id = $1`;
-        return pool.query(sql, [id]);
+        return pool.query(sql, [id])
+            .then(result => result.rows[0])
+            .catch(err => console.error(err));
     }
 
-    // Deletar um usuário pelo ID
-    static deleteById(id) {
-        let sql = `DELETE FROM users WHERE id = $1`;
-        return pool.query(sql, [id]);
-    }
-
-    // Atualizar um usuário pelo ID
-    static update(id, updatedUser) {
-        let sql = `UPDATE users SET username = $1, email = $2, password = $3 WHERE id = $4`;
-        return pool.query(sql, [updatedUser.username, updatedUser.email, updatedUser.password, id]);
-    }
-
-    
-    // Buscar um usuário pelo nome de usuário
-    static findByUsername(username) {
-        let sql = `SELECT * FROM users WHERE username = $1`;
-        return pool.query(sql, [username]);
-    }
 
 }
     
